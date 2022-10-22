@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.red,
+        primarySwatch: Colors.blueGrey,
       ),
       routes: {
         Routes.homePage: (context) => const MyHomePage(title: 'News Today'),//PageContainer(pageType: PageType.HomePage),
@@ -53,7 +53,9 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[ Text(widget.title,
-                                   style: const TextStyle(fontWeight: FontWeight.bold),
+                                   style: const TextStyle(fontWeight: FontWeight.bold,
+                                                          fontFamily: 'LeagueGothic',
+                                                          fontSize: 40,),
                               ),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,

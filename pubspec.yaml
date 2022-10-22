@@ -89,6 +89,13 @@ flutter:
   #       - asset: fonts/TrajanPro.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
+  fonts:
+    - family: LeagueGothic
+      fonts:
+        - asset: lib/fonts/LeagueGothic-Regular.otf
+        - asset: lib/fonts/LeagueGothic-Italic.otf
+          style: italic
+
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
