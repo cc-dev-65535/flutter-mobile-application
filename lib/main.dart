@@ -52,17 +52,24 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[ Text(widget.title),
+          children: <Widget>[ Text(widget.title,
+                                   style: const TextStyle(fontWeight: FontWeight.bold),
+                              ),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                ElevatedButton(
+                Container(
+                  margin: EdgeInsets.fromLTRB(0,0,10.0,0),
+                child: ElevatedButton(
                   onPressed: () => Navigator.popAndPushNamed(context, Routes.firstPage),
                   child: Text("Starred")
-                ),ElevatedButton(
+                )),
+                Container(
+                  //margin: EdgeInsets.fromLTRB(0,0,10.0,0),
+                child: ElevatedButton(
                   onPressed: () => Navigator.popAndPushNamed(context, Routes.secondPage),
                   child: Text("Favourites")
-                ),
+                )),
               ],
             ),
           ],
