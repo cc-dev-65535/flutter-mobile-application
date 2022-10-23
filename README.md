@@ -1,5 +1,5 @@
 # Flutter Application
-News-pulling mobile application created with Flutter SDK.
+News aggregator cross-platform mobile application created with the Flutter SDK.
 
 [Git Repo](https://github.com/grepsedawkcat/flutter_application)  
 
