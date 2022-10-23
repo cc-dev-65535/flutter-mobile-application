@@ -1,16 +1,8 @@
-# my_app
+# Flutter Application
+News-pulling mobile application created with Flutter SDK.
 
-A new Flutter project.
+[Git Repo](https://github.com/grepsedawkcat/flutter_application)  
 
-## Getting Started
+## Details
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![Image](Untitled.png)
