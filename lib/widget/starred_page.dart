@@ -1,52 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:my_app/widget/news_list.dart';
 import 'package:my_app/utils/routes.dart';
-import 'package:my_app/widget/starred_page.dart';
-import 'package:my_app/widget/favourite_page.dart';
 
-void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown])
-  .then((_) => runApp(
-    MyApp(),
-  ));
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blueGrey,
-      ),
-      routes: {
-        Routes.homePage: (context) => const MyHomePage(title: 'News Today'),//PageContainer(pageType: PageType.HomePage),
-        Routes.starredPage: (context) => const StarredPage(title: 'Starred'),//PageContainer(pageType: PageType.FirstPage),
-        Routes.favouritePage: (context) => const FavouritePage(title: 'Favourites'),//PageContainer(pageType: PageType.SecondPage),
-      },
-      home: const MyHomePage(title: 'News Today'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+class StarredPage extends StatefulWidget {
+  const StarredPage({super.key, required this.title});
 
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<StarredPage> createState() => _StarredPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-
-  void _incrementCounter() {
-    return;
-  }
+class _StarredPageState extends State<StarredPage> {
 
   @override
   Widget build(BuildContext context) {
@@ -89,23 +54,11 @@ class _MyHomePageState extends State<MyHomePage> {
               width: 100.0,
               height: 100.0,),
             ),
-            Positioned (
-              top: 0.0,
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Expanded(
-                    child: NewsList(),
-                  ),
-                ],
-              ),
-            ),
+
           ],
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: _incrementCounter,
+          onPressed: () => { },
           tooltip: 'Refresh',
           child: const Icon(Icons.refresh),
         ),
