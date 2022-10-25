@@ -25,28 +25,30 @@ class NewsList extends StatelessWidget {
                 children: <Widget>[Container(
                   //margin: EdgeInsets.all(3.0),
                   //color: Colors.white,
-                  child: Image.network(
-                    articles[index].urlToImage,
+                  child: articles[index].urlToImage != "null" ? Image.network(articles[index].urlToImage,
                     width: 80.0,
-                    height: 150.0,
+                    height: 150.0,) : Image.asset(
+                      'lib/images/No-photo-m.png',
+                      width: 80.0,
+                      height: 150.0,
+                    ),
+                  ),Container(
+                    //margin: EdgeInsets.fromLTRB(2.0,0,0,0),
+                    width: 280,
+                    padding: EdgeInsets.fromLTRB(5.0,0,0,0),
+                    //color: Colors.white,
+                    child: Text(articles[index].title, style: TextStyle( height: 1, fontSize: 10, fontWeight: FontWeight.bold),)
                   ),
-                ),Container(
-                  //margin: EdgeInsets.fromLTRB(2.0,0,0,0),
-                  width: 280,
-                  padding: EdgeInsets.fromLTRB(5.0,0,0,0),
-                  //color: Colors.white,
-                  child: Text(articles[index].title, style: TextStyle( height: 1, fontSize: 10),)
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        );
-      } else {
-        //Display some widget here if no items?
-        return Text("Try again later!");
-      }
-    },
-  );
-}
+          );
+        } else {
+          //Display some widget here if no items?
+          return Text("Try again later!");
+        }
+      },
+    );
+  }
 
 }

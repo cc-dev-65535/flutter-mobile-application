@@ -64,6 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
     widget.controller.onSync.listen((bool syncState) => setState(() { isLoading = syncState; }));
+    _getArticles();
   }
 
   void _getArticles() async {
@@ -78,69 +79,70 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[ Text(widget.title,
-                                   style: const TextStyle(fontWeight: FontWeight.bold,
-                                                          fontFamily: 'LeagueGothic',
-                                                          fontSize: 40,),
-                              ),
+            style: const TextStyle(fontWeight: FontWeight.bold,
+              fontFamily: 'LeagueGothic',
+              fontSize: 40,),
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 Container(
                   margin: EdgeInsets.fromLTRB(0,0,10.0,0),
-                child: ElevatedButton(
-                  onPressed: () => Navigator.pushNamed(context, Routes.starredPage),
-                  child: Text("Starred")
-                )),
-                Container(
-                  //margin: EdgeInsets.fromLTRB(0,0,10.0,0),
-                child: ElevatedButton(
-                  onPressed: () => Navigator.pushNamed(context, Routes.favouritePage),
-                  child: Text("Favourites")
-                )),
+                  child: ElevatedButton(
+                    onPressed: () => Navigator.pushNamed(context, Routes.starredPage),
+                    child: Text("Starred")
+                  )),
+                  Container(
+                    //margin: EdgeInsets.fromLTRB(0,0,10.0,0),
+                    child: ElevatedButton(
+                      onPressed: () => Navigator.pushNamed(context, Routes.favouritePage),
+                      child: Text("Favourites")
+                    )),
+                  ],
+                ),
               ],
             ),
-          ],
-        ),
-      ),
-      body: Stack(
-        children: <Widget>[
-          Positioned (
-            top: (MediaQuery.of(context).size.height * 0.5) - 100.0,
-            left: (MediaQuery.of(context).size.width * 0.5) - 50.0,
-            child: Image.asset(
-              'lib/images/news.png',
-              width: 100.0,
-              height: 100.0,),
+          ),
+          body: Stack(
+            children: <Widget>[
+              Positioned (
+                top: (MediaQuery.of(context).size.height * 0.5) - 100.0,
+                left: (MediaQuery.of(context).size.width * 0.5) - 50.0,
+                child: Image.asset(
+                  'lib/images/news.png',
+                  width: 100.0,
+                  height: 100.0,),
+                ),
+                Positioned (
+                  top: 0.0,
+                  height: MediaQuery.of(context).size.height,
+                  width: MediaQuery.of(context).size.width,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      innerWidget,
+                      Container(height: 140),
+                    ],
+                  ),
+                ),
+              ],
             ),
-            Positioned (
-              top: 0.0,
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  innerWidget,
-                ],
+            floatingActionButton: FloatingActionButton(
+              onPressed: _getArticles,
+              tooltip: 'Refresh',
+              child: const Icon(Icons.refresh),
+            ),
+            bottomNavigationBar: BottomAppBar(
+              color: Colors.blueGrey,
+              child: Container(
+                child: TextButton(
+                  onPressed: () => Navigator.popUntil(context, ModalRoute.withName(Routes.homePage)),
+                  child: Icon(Icons.home,
+                    color: Colors.white,
+                    size: 24.0,
+                  ),
+                )),
               ),
-            ),
-          ],
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: _getArticles,
-          tooltip: 'Refresh',
-          child: const Icon(Icons.refresh),
-        ),
-        bottomNavigationBar: BottomAppBar(
-          color: Colors.blueGrey,
-          child: Container(
-          child: TextButton(
-            onPressed: () => Navigator.popUntil(context, ModalRoute.withName(Routes.homePage)),
-            child: Icon(Icons.home,
-                        color: Colors.white,
-                        size: 24.0,
-            ),
-          )),
-        ),
-      );
-    }
-  }
+            );
+          }
+        }

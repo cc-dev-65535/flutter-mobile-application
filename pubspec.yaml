@@ -66,6 +66,7 @@ flutter:
   assets:
       - lib/images/news.png
       - lib/images/politico.jpg
+      - lib/images/No-photo-m.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
