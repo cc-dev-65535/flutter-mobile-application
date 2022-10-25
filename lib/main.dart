@@ -1,20 +1,30 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:my_app/widget/news_list.dart';
 import 'package:my_app/utils/routes.dart';
 import 'package:my_app/widget/starred_page.dart';
 import 'package:my_app/widget/favourite_page.dart';
+import 'package:my_app/services/services.dart';
+import 'package:my_app/controllers/articles.dart';
+import 'package:my_app/models/newsItem.dart';
 
 void main() {
+  var services = HttpServices();
+  var controller = ArticleController(services);
+
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown])
   .then((_) => runApp(
-    MyApp(),
+    MyApp(controller: controller),
   ));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({super.key, required this.controller});
+
+  final ArticleController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -24,19 +34,21 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blueGrey,
       ),
       routes: {
-        Routes.homePage: (context) => const MyHomePage(title: 'News Today'),//PageContainer(pageType: PageType.HomePage),
-        Routes.starredPage: (context) => const StarredPage(title: 'Starred'),//PageContainer(pageType: PageType.FirstPage),
-        Routes.favouritePage: (context) => const FavouritePage(title: 'Favourites'),//PageContainer(pageType: PageType.SecondPage),
+        Routes.homePage: (context) => MyHomePage(title: 'News Today', controller: controller),//PageContainer(pageType: PageType.HomePage),
+        Routes.starredPage: (context) => StarredPage(title: 'Starred'),//PageContainer(pageType: PageType.FirstPage),
+        Routes.favouritePage: (context) => FavouritePage(title: 'Favourites'),//PageContainer(pageType: PageType.SecondPage),
       },
-      home: const MyHomePage(title: 'News Today'),
+      //home: MyHomePage(title: 'News Today', controller: controller),
+      initialRoute: Routes.homePage,
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+  const MyHomePage({super.key, required this.title, required this.controller});
 
   final String title;
+  final ArticleController controller;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -44,8 +56,19 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-  void _incrementCounter() {
-    return;
+  bool isLoading = false;
+  List<NewsItem> articles = [];
+
+  Widget get innerWidget => isLoading ? CircularProgressIndicator() : Expanded(child: NewsList(articles : articles));
+
+  void initState() {
+    super.initState();
+    widget.controller.onSync.listen((bool syncState) => setState(() { isLoading = syncState; }));
+  }
+
+  void _getArticles() async {
+    var returnedNews = await widget.controller.fetchArticles();
+    setState(() => articles = returnedNews);
   }
 
   @override
@@ -65,13 +88,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 Container(
                   margin: EdgeInsets.fromLTRB(0,0,10.0,0),
                 child: ElevatedButton(
-                  onPressed: () => Navigator.popAndPushNamed(context, Routes.starredPage),
+                  onPressed: () => Navigator.pushNamed(context, Routes.starredPage),
                   child: Text("Starred")
                 )),
                 Container(
                   //margin: EdgeInsets.fromLTRB(0,0,10.0,0),
                 child: ElevatedButton(
-                  onPressed: () => Navigator.popAndPushNamed(context, Routes.favouritePage),
+                  onPressed: () => Navigator.pushNamed(context, Routes.favouritePage),
                   child: Text("Favourites")
                 )),
               ],
@@ -96,16 +119,14 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Expanded(
-                    child: NewsList(),
-                  ),
+                  innerWidget,
                 ],
               ),
             ),
           ],
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: _incrementCounter,
+          onPressed: _getArticles,
           tooltip: 'Refresh',
           child: const Icon(Icons.refresh),
         ),
@@ -113,7 +134,7 @@ class _MyHomePageState extends State<MyHomePage> {
           color: Colors.blueGrey,
           child: Container(
           child: TextButton(
-            onPressed: () => Navigator.popAndPushNamed(context, Routes.homePage),
+            onPressed: () => Navigator.popUntil(context, ModalRoute.withName(Routes.homePage)),
             child: Icon(Icons.home,
                         color: Colors.white,
                         size: 24.0,

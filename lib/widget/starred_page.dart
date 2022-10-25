@@ -30,13 +30,13 @@ class _StarredPageState extends State<StarredPage> {
                 Container(
                   margin: EdgeInsets.fromLTRB(0,0,10.0,0),
                 child: ElevatedButton(
-                  onPressed: () => Navigator.popAndPushNamed(context, Routes.starredPage),
+                  onPressed: () => Navigator.pushNamed(context, Routes.starredPage),
                   child: Text("Starred")
                 )),
                 Container(
                   //margin: EdgeInsets.fromLTRB(0,0,10.0,0),
                 child: ElevatedButton(
-                  onPressed: () => Navigator.popAndPushNamed(context, Routes.favouritePage),
+                  onPressed: () => Navigator.pushNamed(context, Routes.favouritePage),
                   child: Text("Favourites")
                 )),
               ],
@@ -66,7 +66,7 @@ class _StarredPageState extends State<StarredPage> {
           color: Colors.blueGrey,
           child: Container(
           child: TextButton(
-            onPressed: () => Navigator.popAndPushNamed(context, Routes.homePage),
+            onPressed: () => Navigator.popUntil(context, ModalRoute.withName(Routes.homePage)),
             child: Icon(Icons.home,
                         color: Colors.white,
                         size: 24.0,
