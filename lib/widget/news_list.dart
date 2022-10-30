@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/models/newsItem.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class NewsList extends StatelessWidget {
   NewsList({required this.articles});
@@ -14,6 +15,8 @@ class NewsList extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(10.0,0,10.0,0),
       itemBuilder: (BuildContext context, int index) {
         if (articles != null) {
+          //final Uri externalUrl = Uri.parse(articles[index].url);
+          var url = Uri.https('newsapi.org', '/v2/top-headlines', {'country': 'us', 'apiKey' : 'c6af5a55ce744353bf9744ad09314724'});
           return Dismissible(
             key: ValueKey(index),
             child: Container(
@@ -35,9 +38,36 @@ class NewsList extends StatelessWidget {
                   ),Container(
                     //margin: EdgeInsets.fromLTRB(2.0,0,0,0),
                     width: 280,
-                    padding: EdgeInsets.fromLTRB(5.0,0,0,0),
+                    padding: EdgeInsets.fromLTRB(5.0,15.0,0,0),
                     //color: Colors.white,
-                    child: Text(articles[index].title, style: TextStyle( height: 1, fontSize: 10, fontWeight: FontWeight.bold),)
+                    child: Column(
+                        children: <Widget>[ Text(
+                                            articles[index].title,
+                                            style: TextStyle( height: 1, fontSize: 10, fontWeight: FontWeight.bold)),
+                                          InkWell(
+                                            child: Text('Read More', style: TextStyle(height: 1, fontSize: 10, fontWeight: FontWeight.bold, color: Colors.blue, decoration: TextDecoration.underline)),
+                                            onTap: () => launch(articles[index].url),),],
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                      )
+                    /*RichText(
+                      text: TextSpan(
+                        text: articles[index].title + ' - ',
+                        style: TextStyle( height: 1, fontSize: 10, fontWeight: FontWeight.bold),
+                        children: const <TextSpan>[
+                          TextSpan(text: 'Read More',
+                                  style: TextStyle(color: Colors.blue, decoration: TextDecoration.underline),
+                                  recognizer: TapGestureRecognizer(),
+                                    ..onTap = () async {
+                                      if (await canLaunch(externalUrl)) {
+                                        await launch(externalUrl);
+                                      } else {
+                                        print("URL can't be launched.");
+                                      }
+                                    }
+                          ),
+                        ],
+                      ),
+                    )*/
                   ),
                 ],
               ),
