@@ -1,7 +1,7 @@
 # Flutter Application
 News aggregator cross-platform mobile application created with the Flutter SDK.
 
-[Git Repo](https://github.com/grepsedawkcat/flutter_application)  
+[Git Repo](https://github.com/collinc1212/flutter_application)  
 
 ## Details  
 * Uses web API at https://newsapi.org/ for data
