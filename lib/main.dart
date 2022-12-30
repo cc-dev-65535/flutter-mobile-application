@@ -185,10 +185,10 @@ class _MyHomePageState extends State<MyHomePage> {
               Container(
                   color: selected == "sports" ? Colors.grey : null,
                   child: TextButton(
-                    onPressed: () => setState(() {
+                    onPressed: () {
                       selected = "sports";
                       _getArticlesCategory();
-                    }),
+                    },
                     child: Icon(
                       Icons.sports_football,
                       color: Colors.white,
@@ -198,10 +198,10 @@ class _MyHomePageState extends State<MyHomePage> {
               Container(
                   color: selected == "general" ? Colors.grey : null,
                   child: TextButton(
-                    onPressed: () => setState(() {
+                    onPressed: () {
                       selected = "general";
                       _getArticles();
-                    }),
+                    },
                     child: Icon(
                       Icons.home,
                       color: Colors.white,
@@ -211,10 +211,10 @@ class _MyHomePageState extends State<MyHomePage> {
               Container(
                   color: selected == "technology" ? Colors.grey : null,
                   child: TextButton(
-                    onPressed: () => setState(() {
+                    onPressed: () {
                       selected = "technology";
                       _getArticlesCategory();
-                    }),
+                    },
                     child: Icon(
                       Icons.computer,
                       color: Colors.white,
