@@ -60,48 +60,48 @@ class _SettingPageState extends State<SettingPage> {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => {},
-        tooltip: 'Refresh',
-        child: const Icon(Icons.refresh),
-      ),
-      bottomNavigationBar: BottomAppBar(
-          color: Colors.blueGrey,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              Container(
-                  child: TextButton(
-                onPressed: () => Navigator.popUntil(
-                    context, ModalRoute.withName(Routes.homePage)),
-                child: Icon(
-                  Icons.sports_football,
-                  color: Colors.white,
-                  size: 24.0,
-                ),
-              )),
-              Container(
-                  child: TextButton(
-                onPressed: () => Navigator.popUntil(
-                    context, ModalRoute.withName(Routes.homePage)),
-                child: Icon(
-                  Icons.home,
-                  color: Colors.white,
-                  size: 24.0,
-                ),
-              )),
-              Container(
-                  child: TextButton(
-                onPressed: () => Navigator.popUntil(
-                    context, ModalRoute.withName(Routes.homePage)),
-                child: Icon(
-                  Icons.computer,
-                  color: Colors.white,
-                  size: 24.0,
-                ),
-              )),
-            ],
-          )),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () => {},
+      //   tooltip: 'Refresh',
+      //   child: const Icon(Icons.refresh),
+      // ),
+      // bottomNavigationBar: BottomAppBar(
+      //     color: Colors.blueGrey,
+      //     child: Row(
+      //       mainAxisAlignment: MainAxisAlignment.spaceAround,
+      //       children: <Widget>[
+      //         Container(
+      //             child: TextButton(
+      //           onPressed: () => Navigator.popUntil(
+      //               context, ModalRoute.withName(Routes.homePage)),
+      //           child: Icon(
+      //             Icons.sports_football,
+      //             color: Colors.white,
+      //             size: 24.0,
+      //           ),
+      //         )),
+      //         Container(
+      //             child: TextButton(
+      //           onPressed: () => Navigator.popUntil(
+      //               context, ModalRoute.withName(Routes.homePage)),
+      //           child: Icon(
+      //             Icons.home,
+      //             color: Colors.white,
+      //             size: 24.0,
+      //           ),
+      //         )),
+      //         Container(
+      //             child: TextButton(
+      //           onPressed: () => Navigator.popUntil(
+      //               context, ModalRoute.withName(Routes.homePage)),
+      //           child: Icon(
+      //             Icons.computer,
+      //             color: Colors.white,
+      //             size: 24.0,
+      //           ),
+      //         )),
+      //       ],
+      //     )),
     );
   }
 }

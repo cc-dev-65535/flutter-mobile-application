@@ -67,10 +67,13 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   bool isLoading = false;
   List<NewsItem> articles = [];
+  //List<NewsItem> sportsArticles = [];
+  //List<NewsItem> techArticles = [];
+  String selected = "general";
 
   Widget get innerWidget => isLoading
       ? CircularProgressIndicator()
-      : Expanded(child: NewsList(articles: articles));
+      : _chooseCategory();
 
   void initState() {
     super.initState();
@@ -83,6 +86,28 @@ class _MyHomePageState extends State<MyHomePage> {
   void _getArticles() async {
     var returnedNews = await widget.controller.fetchArticles();
     setState(() => articles = returnedNews);
+  }
+
+  void _getArticlesCategory() async {
+    var returnedNews;
+    if (selected == "sports") {
+      returnedNews = await widget.controller.fetchCategoryArticles("sports");
+    } else {
+      returnedNews = await widget.controller.fetchCategoryArticles("technology");
+    }
+
+    setState(() => articles = returnedNews);
+  }
+
+  Widget _chooseCategory() {
+    // if (selected == "sports") {
+    //   return Expanded(child: NewsList(articles: sportsArticles));
+    // }
+    // else if (selected == "technology") {
+    //   return Expanded(child: NewsList(articles: techArticles));
+    // } else {
+      return Expanded(child: NewsList(articles: articles));
+    //}
   }
 
   @override
@@ -146,7 +171,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _getArticles,
+        onPressed: (selected == "sports" ||  selected == "technology") ? _getArticlesCategory : _getArticles,
         tooltip: 'Refresh',
         child: const Icon(Icons.refresh),
       ),
@@ -156,9 +181,11 @@ class _MyHomePageState extends State<MyHomePage> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
               Container(
+                color: selected == "sports" ? Colors.grey : null,
                   child: TextButton(
-                onPressed: () => Navigator.popUntil(
-                    context, ModalRoute.withName(Routes.homePage)),
+                onPressed: () => setState(() {selected = "sports";
+                                              _getArticlesCategory();
+                }),
                 child: Icon(
                   Icons.sports_football,
                   color: Colors.white,
@@ -166,9 +193,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               )),
               Container(
+                color: selected == "general" ? Colors.grey : null,
                   child: TextButton(
-                onPressed: () => Navigator.popUntil(
-                    context, ModalRoute.withName(Routes.homePage)),
+                onPressed: () => setState(() {selected = "general";
+                                              _getArticles();
+                }),
                 child: Icon(
                   Icons.home,
                   color: Colors.white,
@@ -176,9 +205,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               )),
               Container(
+                color: selected == "technology" ? Colors.grey : null,
                   child: TextButton(
-                onPressed: () => Navigator.popUntil(
-                    context, ModalRoute.withName(Routes.homePage)),
+                onPressed: () => setState(() {selected = "technology";
+                                              _getArticlesCategory();
+                }),
                 child: Icon(
                   Icons.computer,
                   color: Colors.white,

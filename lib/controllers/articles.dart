@@ -18,4 +18,11 @@ class ArticleController {
     onSyncController.add(false);
     return articles;
   }
+
+    Future<List<NewsItem>> fetchCategoryArticles(String category) async {
+    onSyncController.add(true);
+    articles = await services.getNewsItemsCategory(category);
+    onSyncController.add(false);
+    return articles;
+  }
 }
