@@ -183,7 +183,7 @@ class _MyHomePageState extends State<MyHomePage> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
               Container(
-                  color: selected == "sports" ? Colors.grey : null,
+                  decoration: selected == "sports" ? BoxDecoration(color: Colors.grey, shape: BoxShape.circle) : null,
                   child: TextButton(
                     onPressed: () {
                       selected = "sports";
@@ -196,7 +196,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   )),
               Container(
-                  color: selected == "general" ? Colors.grey : null,
+                  decoration: selected == "general" ? BoxDecoration(color: Colors.grey, shape: BoxShape.circle) : null,
                   child: TextButton(
                     onPressed: () {
                       selected = "general";
@@ -209,7 +209,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   )),
               Container(
-                  color: selected == "technology" ? Colors.grey : null,
+                  decoration: selected == "technology" ? BoxDecoration(color: Colors.grey, shape: BoxShape.circle) : null,
                   child: TextButton(
                     onPressed: () {
                       selected = "technology";
