@@ -71,9 +71,8 @@ class _MyHomePageState extends State<MyHomePage> {
   //List<NewsItem> techArticles = [];
   String selected = "general";
 
-  Widget get innerWidget => isLoading
-      ? CircularProgressIndicator()
-      : _chooseCategory();
+  Widget get innerWidget =>
+      isLoading ? CircularProgressIndicator() : _chooseCategory();
 
   void initState() {
     super.initState();
@@ -93,7 +92,8 @@ class _MyHomePageState extends State<MyHomePage> {
     if (selected == "sports") {
       returnedNews = await widget.controller.fetchCategoryArticles("sports");
     } else {
-      returnedNews = await widget.controller.fetchCategoryArticles("technology");
+      returnedNews =
+          await widget.controller.fetchCategoryArticles("technology");
     }
 
     setState(() => articles = returnedNews);
@@ -106,7 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // else if (selected == "technology") {
     //   return Expanded(child: NewsList(articles: techArticles));
     // } else {
-      return Expanded(child: NewsList(articles: articles));
+    return Expanded(child: NewsList(articles: articles));
     //}
   }
 
@@ -171,7 +171,9 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: (selected == "sports" ||  selected == "technology") ? _getArticlesCategory : _getArticles,
+        onPressed: (selected == "sports" || selected == "technology")
+            ? _getArticlesCategory
+            : _getArticles,
         tooltip: 'Refresh',
         child: const Icon(Icons.refresh),
       ),
@@ -181,41 +183,44 @@ class _MyHomePageState extends State<MyHomePage> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
               Container(
-                color: selected == "sports" ? Colors.grey : null,
+                  color: selected == "sports" ? Colors.grey : null,
                   child: TextButton(
-                onPressed: () => setState(() {selected = "sports";
-                                              _getArticlesCategory();
-                }),
-                child: Icon(
-                  Icons.sports_football,
-                  color: Colors.white,
-                  size: 24.0,
-                ),
-              )),
+                    onPressed: () => setState(() {
+                      selected = "sports";
+                      _getArticlesCategory();
+                    }),
+                    child: Icon(
+                      Icons.sports_football,
+                      color: Colors.white,
+                      size: 24.0,
+                    ),
+                  )),
               Container(
-                color: selected == "general" ? Colors.grey : null,
+                  color: selected == "general" ? Colors.grey : null,
                   child: TextButton(
-                onPressed: () => setState(() {selected = "general";
-                                              _getArticles();
-                }),
-                child: Icon(
-                  Icons.home,
-                  color: Colors.white,
-                  size: 24.0,
-                ),
-              )),
+                    onPressed: () => setState(() {
+                      selected = "general";
+                      _getArticles();
+                    }),
+                    child: Icon(
+                      Icons.home,
+                      color: Colors.white,
+                      size: 24.0,
+                    ),
+                  )),
               Container(
-                color: selected == "technology" ? Colors.grey : null,
+                  color: selected == "technology" ? Colors.grey : null,
                   child: TextButton(
-                onPressed: () => setState(() {selected = "technology";
-                                              _getArticlesCategory();
-                }),
-                child: Icon(
-                  Icons.computer,
-                  color: Colors.white,
-                  size: 24.0,
-                ),
-              )),
+                    onPressed: () => setState(() {
+                      selected = "technology";
+                      _getArticlesCategory();
+                    }),
+                    child: Icon(
+                      Icons.computer,
+                      color: Colors.white,
+                      size: 24.0,
+                    ),
+                  )),
             ],
           )),
     );
